@@ -48,7 +48,12 @@ public class AddTest {
 
     @Test
     public void shouldReturnSumForTwoNumbersSeparatedByCustomDelimiter() {
-        assertEquals(5, stringCalculator.add("//$2$3"));
+        assertEquals(5, stringCalculator.add("//$\n2$3"));
+    }
+
+    @Test
+    public void shouldReturnSumForFiveNumbersSeparatedByCustomDelimiter() {
+        assertEquals(20, stringCalculator.add("//%\n2%3%4%5%6"));
     }
 }
 
