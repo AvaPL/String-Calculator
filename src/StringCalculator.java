@@ -4,8 +4,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
-    private Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
-    private Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
+    private final Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
+    private final Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
 
     public int add(String numbers) {
         String[] delimiters = getDelimiters(numbers);
