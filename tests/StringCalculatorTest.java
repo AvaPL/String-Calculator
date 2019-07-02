@@ -25,4 +25,24 @@ public class StringCalculatorTest {
     public void shouldReturnSumForTwoNumbersSeparatedByComma() {
         assertEquals(5, stringCalculator.add("2,3"));
     }
+
+    @Test
+    public void shouldReturnSumForThreeNumbersSeparatedByComma() {
+        assertEquals(9, stringCalculator.add("2,3,4"));
+    }
+
+    @Test
+    public void shouldReturnSumForFiveNumbersSeparatedByComma() {
+        assertEquals(20, stringCalculator.add("2,3,4,5,6"));
+    }
+
+    @Test
+    public void shouldReturnSumForTwoNumbersSeparatedByNewLine() {
+        assertEquals(5, stringCalculator.add("2\n3"));
+    }
+
+    @Test
+    public void shouldReturnSumForFiveNumbersSeparatedByCommaOrNewLine() {
+        assertEquals(20, stringCalculator.add("2,3\n4\n5,6"));
+    }
 }
