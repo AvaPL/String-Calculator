@@ -8,8 +8,6 @@ public class StringCalculator {
     private Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
 
     public int add(String numbers) {
-        if (numbers.isEmpty())
-            return 0;
         String[] delimiters = getDelimiters(numbers);
         int[] parsedNumbers = getNumbers(numbers, delimiters);
         return Arrays.stream(parsedNumbers).sum();
@@ -33,7 +31,7 @@ public class StringCalculator {
         if (matcher.find())
             return parseNumbers(numbers, delimiters, matcher.start());
         else
-            return new int[]{}; //Only delimiters in string.
+            return new int[]{}; //Empty string or only prefix in string.
     }
 
     private int[] parseNumbers(String numbers, String[] delimiters, int numbersStartIndex) {
