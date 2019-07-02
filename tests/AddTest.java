@@ -3,8 +3,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class StringCalculatorTest {
-    StringCalculator stringCalculator;
+public class AddTest {
+    private StringCalculator stringCalculator;
 
     @Before
     public void setUp() {
@@ -45,4 +45,10 @@ public class StringCalculatorTest {
     public void shouldReturnSumForFiveNumbersSeparatedByCommaOrNewLine() {
         assertEquals(20, stringCalculator.add("2,3\n4\n5,6"));
     }
+
+    @Test
+    public void shouldReturnSumForTwoNumbersSeparatedByCustomDelimiter() {
+        assertEquals(5, stringCalculator.add("//$2$3"));
+    }
 }
+
