@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 public class PrivateMethodTester {
     private Method methodToBeTested;
 
-    public PrivateMethodTester(Class targetClass, String name, Class<?>... parameterTypes) {
+    public PrivateMethodTester(Class<?> targetClass, String name, Class<?>... parameterTypes) {
         try {
             methodToBeTested = targetClass.getDeclaredMethod(name, parameterTypes);
             methodToBeTested.setAccessible(true);

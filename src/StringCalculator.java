@@ -4,12 +4,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
-    private Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
-    private Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
+    private final Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
+    private final Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
 
     public int add(String numbers) {
         String[] delimiters = getDelimiters(numbers);
         int[] parsedNumbers = getNumbers(numbers, delimiters);
+        checkInputCorrectness(parsedNumbers);
         return Arrays.stream(parsedNumbers).sum();
     }
 
@@ -42,5 +43,11 @@ public class StringCalculator {
 
     private String getDelimitersRegex(String[] delimiters) {
         return "[" + Arrays.stream(delimiters).collect(Collectors.joining()) + "]";
+    }
+
+    private void checkInputCorrectness(int[] parsedNumbers) {
+        int[] negatives = Arrays.stream(parsedNumbers).filter(x -> x < 0).toArray();
+        if (negatives.length > 0)
+            throw new IllegalArgumentException("Negatives not allowed: " + Arrays.toString(negatives));
     }
 }
