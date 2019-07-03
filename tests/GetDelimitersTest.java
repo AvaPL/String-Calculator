@@ -36,4 +36,14 @@ public class GetDelimitersTest {
     public void shouldReturnCustomDelimiterForStringWithPrefix() {
         assertArrayEquals(new String[]{";"}, getDelimiters("//;\n2;15\n7"));
     }
+
+    @Test
+    public void shouldReturnCustomDelimiterWithRepeatingCharacter() {
+        assertArrayEquals(new String[]{";;;"}, getDelimiters("//[;;;]\n2;;;15\n7"));
+    }
+
+    @Test
+    public void shouldReturnCustomDelimiterWithDifferentCharacters() {
+        assertArrayEquals(new String[]{"^test$"}, getDelimiters("//[^test$]\n2^test$15\n7"));
+    }
 }
