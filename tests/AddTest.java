@@ -66,5 +66,25 @@ public class AddTest {
             assertEquals("Negatives not allowed: [-3, -5]", e.getMessage());
         }
     }
+
+    @Test
+    public void shouldIgnoreNumbersBiggerThan1000() {
+        assertEquals(1001, stringCalculator.add("//%\n1000%1%1001"));
+    }
+
+    @Test
+    public void shouldReturnSumForCustomDelimiterOfAnyLength() {
+        assertEquals(32, stringCalculator.add("//[%%%]\n9%%%11%%%12"));
+    }
+
+    @Test
+    public void shouldReturnSumForCustomDelimiterBeingARegexSpecialCharacter() {
+        assertEquals(5, stringCalculator.add("//|\n2|3"));
+    }
+
+    @Test
+    public void shouldReturnSumForCustomDelimiterContainingRegexSpecialCharacters() {
+        assertEquals(20, stringCalculator.add("//[|%$]\n2|%$14|%$4"));
+    }
 }
 
