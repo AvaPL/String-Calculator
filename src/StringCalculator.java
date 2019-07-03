@@ -25,7 +25,7 @@ public class StringCalculator {
     private String[] extractCustomDelimiter(String numbers, int prefixEndIndex) {
         if (isDelimiterInBrackets(prefixEndIndex))
             //Left bracket is at index 3, right bracket is at index prefixEndIndex - 1 eg. //[;;]\n1;;2
-            return new String[]{numbers.substring(3, prefixEndIndex - 1)};
+            return extractDelimitersFromBrackets(numbers, prefixEndIndex);
         else //Without brackets delimiter is exactly at index 2 eg. //;\n1;2.
             return new String[]{numbers.substring(2, 3)};
     }
@@ -34,6 +34,12 @@ public class StringCalculator {
         //For square brackets delimiter prefix end is at index at least 5 eg. //[;]\n1;2.
         //For single character delimiter prefix end is exactly at index 3 eg. //;\n1;2.
         return prefixEndIndex != 3;
+    }
+
+    private String[] extractDelimitersFromBrackets(String numbers, int prefixEndIndex) {
+        String delimitersToSplit = numbers
+                .substring(3, prefixEndIndex - 1); //Delimiters separated by "][" eg. ##][^.^][%%.
+        return delimitersToSplit.split("\\]\\[");
     }
 
     private int[] getNumbers(String numbers, String[] delimiters) {
