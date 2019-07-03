@@ -34,16 +34,26 @@ public class GetDelimitersTest {
 
     @Test
     public void shouldReturnCustomDelimiterForStringWithPrefix() {
-        assertArrayEquals(new String[]{";"}, getDelimiters("//;\n2;15\n7"));
+        assertArrayEquals(new String[]{";"}, getDelimiters("//;\n2;15;7"));
     }
 
     @Test
     public void shouldReturnCustomDelimiterWithRepeatingCharacter() {
-        assertArrayEquals(new String[]{";;;"}, getDelimiters("//[;;;]\n2;;;15\n7"));
+        assertArrayEquals(new String[]{";;;"}, getDelimiters("//[;;;]\n2;;;15;;;7"));
     }
 
     @Test
-    public void shouldReturnCustomDelimiterWithDifferentCharacters() {
-        assertArrayEquals(new String[]{"^test$"}, getDelimiters("//[^test$]\n2^test$15\n7"));
+    public void shouldReturnCustomDelimiterOfAnyLength() {
+        assertArrayEquals(new String[]{"^test$"}, getDelimiters("//[^test$]\n2^test$15^test$7"));
+    }
+
+    @Test
+    public void shouldReturnMultipleSingleCharacterCustomDelimiters() {
+        assertArrayEquals(new String[]{"#", "%", "$"}, getDelimiters("//[#][%][$]\n2#15$7%12"));
+    }
+
+    @Test
+    public void shouldReturnMultipleCustomDelimitersOfAnyLength() {
+        assertArrayEquals(new String[]{"#$%", "^&*", "!@()"}, getDelimiters("//[#$%][^&*][!@()]\n2#$%15^&*7!@()12"));
     }
 }

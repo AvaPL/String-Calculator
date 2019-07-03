@@ -61,8 +61,7 @@ public class AddTest {
         try {
             stringCalculator.add("//%\n2%-3%4%-5%6");
             fail("Exception not thrown");
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("Negatives not allowed: [-3, -5]", e.getMessage());
         }
     }
@@ -85,6 +84,21 @@ public class AddTest {
     @Test
     public void shouldReturnSumForCustomDelimiterContainingRegexSpecialCharacters() {
         assertEquals(20, stringCalculator.add("//[|%$]\n2|%$14|%$4"));
+    }
+
+    @Test
+    public void shouldReturnSumForMultipleCustomDelimitersOfAnyLength() {
+        assertEquals(32, stringCalculator.add("//[%#%][#%#]\n9%#%11#%#12"));
+    }
+
+    @Test
+    public void shouldReturn0ForMultipleDelimitersOnly() {
+        assertEquals(0, stringCalculator.add("//[@][%%][test]\n"));
+    }
+
+    @Test
+    public void shouldReturnNumberForSingleNumberWithMultipleDelimiters() {
+        assertEquals(15, stringCalculator.add("//[@][%%][test]\n15"));
     }
 }
 
