@@ -41,4 +41,14 @@ public class GetNumbersTest {
     public void shouldReturnThreeNumbersForCustomDelimiter() {
         assertArrayEquals(new int[]{11, 12, 7}, getNumbers("//#\n11#12#7", new String[]{"#"}));
     }
+
+    @Test
+    public void shouldReturnNegativeNumbersForDefaultDelimiters() {
+        assertArrayEquals(new int[]{11, -12, -7}, getNumbers("11,-12\n-7", new String[]{",", "\n"}));
+    }
+
+    @Test
+    public void shouldReturnNegativeNumbersForCustomDelimiter() {
+        assertArrayEquals(new int[]{11, -12, -7}, getNumbers("//#\n11#-12#-7", new String[]{"#"}));
+    }
 }

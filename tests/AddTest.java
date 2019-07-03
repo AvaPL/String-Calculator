@@ -55,5 +55,16 @@ public class AddTest {
     public void shouldReturnSumForFiveNumbersSeparatedByCustomDelimiter() {
         assertEquals(20, stringCalculator.add("//%\n2%3%4%5%6"));
     }
+
+    @Test
+    public void shouldThrowExceptionForNegativesInInput() {
+        try {
+            stringCalculator.add("//%\n2%-3%4%-5%6");
+            fail("Exception not thrown");
+        }
+        catch (IllegalArgumentException e){
+            assertEquals("Negatives not allowed: [-3, -5]", e.getMessage());
+        }
+    }
 }
 
