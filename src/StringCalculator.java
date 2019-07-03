@@ -4,14 +4,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
-    private final Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
-    private final Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
+    private static final Pattern delimiterPrefixRegex = Pattern.compile("//\\D\\n");
+    private static final Pattern numbersRegex = Pattern.compile("\\d+(?:\\D\\d+)*");
+    private static final int maxNumberValue = 1000;
 
     public int add(String numbers) {
         String[] delimiters = getDelimiters(numbers);
         int[] parsedNumbers = getNumbers(numbers, delimiters);
-        checkInputCorrectness(parsedNumbers);
-        return Arrays.stream(parsedNumbers).sum();
+        return sumNumbers(parsedNumbers);
     }
 
     private String[] getDelimiters(String numbers) {
@@ -43,6 +43,12 @@ public class StringCalculator {
 
     private String getDelimitersRegex(String[] delimiters) {
         return "[" + Arrays.stream(delimiters).collect(Collectors.joining()) + "]";
+    }
+
+    private int sumNumbers(int[] parsedNumbers) {
+        checkInputCorrectness(parsedNumbers);
+        return Arrays.stream(parsedNumbers).filter(x -> x <= maxNumberValue)
+                     .sum(); //Ignores numbers bigger than maxNumberValue.
     }
 
     private void checkInputCorrectness(int[] parsedNumbers) {

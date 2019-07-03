@@ -66,5 +66,10 @@ public class AddTest {
             assertEquals("Negatives not allowed: [-3, -5]", e.getMessage());
         }
     }
+
+    @Test
+    public void shouldIgnoreNumbersBiggerThan1000() {
+        assertEquals(1001, stringCalculator.add("//%\n1000%1%1001"));
+    }
 }
 
